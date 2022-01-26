@@ -106,7 +106,7 @@ resource "aws_instance" "java10x_netproject_group2_server_bastion_tf" {
     key_name = "cyber-10x-group2"
 
     subnet_id = aws_subnet.java10x_netproject_group2_subnet_bastion_tf.id
-    vpc_security_group_ids = [aws_security_group.]
+    vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_bastion.id]
     associate_public_ip_address = true
 
     tags = {
