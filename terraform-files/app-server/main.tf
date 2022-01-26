@@ -132,7 +132,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
     associate_public_ip_address = true
 
     count = 3
-    depends_on = [var.var_database_id_tf]
+    depends_on = [var.var_db_instance_tf]
 
     connection {
       type = "ssh"
