@@ -118,7 +118,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_app_tf" {
   }
 
   tags = {
-    Name = "java10x_group2_sg_app"
+    Name = "java10x_netproject_group2_sg_app"
   }
 }
 
@@ -139,7 +139,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
     }
 
     tags = {
-      Name = "java10x_group2_instance_app"
+      Name = "java10x_netproject_group2_instance_app"
     }
 }
 
