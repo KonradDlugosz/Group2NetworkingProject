@@ -90,7 +90,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_app_tf" {
     protocol = "tcp"
     from_port = 22
     to_port = 22
-    cidr_blocks = [""]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
     protocol = "tcp"
