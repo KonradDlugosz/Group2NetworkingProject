@@ -160,8 +160,8 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
 
     provisioner "remote-exec" {
       inline = [
-        "docker pull riaj382/sakila:2.0",
-        "docker run -d -p 8080:8080 --mount type=bind,source=/ubuntu/applications.properties,target=/applications.properties riaj382/sakila",
+        "docker pull talalt/sakilarestapi:4.0",
+        "docker run -d -p 8080:8080 --mount type=bind,source=/home/ubuntu/application.properties,target=/application.properties talalt/sakilarestapi:4.0",
       ]
     }
 
