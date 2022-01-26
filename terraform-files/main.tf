@@ -52,7 +52,7 @@ resource "aws_route_table" "java10x_netproject_group2_rt_tf" {
 
 module "app_module" {
   source = "./app-server"
-
+  var_db_instance_tf = module.db_module.output_db
   var_vpc_id_tf = aws_vpc.java10x_netproject_group2_vpc_tf.id
   var_ami_linux_ubuntu_tf = var.var_ami_linux_ubuntu_tf
   var_rt_tf = aws_route_table.java10x_netproject_group2_rt_tf.id
@@ -61,6 +61,7 @@ module "app_module" {
 
 module "db_module" {
   source = "./db-server"
+  var_db_instance_tf = module.db_module.output_db
   var_vpc_id_tf = aws_vpc.java10x_netproject_group2_vpc_tf.id
   var_zone_id_tf = aws_route53_zone.java10x_netproject_group2_r53_zone_tf.id
   var_rt_id_tf = aws_route_table.java10x_netproject_group2_rt_tf.id
