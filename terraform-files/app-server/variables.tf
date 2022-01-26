@@ -9,3 +9,6 @@ variable "var_zone_id_tf" {
 
 variable "var_ami_linux_ubuntu_tf" {
 }
+
+variable "var_local_ip_tf" {
+}
