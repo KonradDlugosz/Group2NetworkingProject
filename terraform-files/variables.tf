@@ -9,3 +9,11 @@ variable "var_zone_name" {
 variable "var_ami_linux_ubuntu_tf" {
   default = "ami-08ca3fed11864d6bb"
 }
+
+variable var_proxy_subnet_ip_tf {
+  default = "10.15.4.0/24"
+}
+
+variable var_key_file_path_tf {
+    default = "/home/vagrant/.ssh/cyber-10x-group2.pem"
+}
