@@ -19,7 +19,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_app_tf"{
     protocol = "tcp"
     rule_no = 100
     action = "allow"
-    cidr_block = ""
+    cidr_block = "0.0.0.0/0"
     from_port = 22
     to_port = 22
   }
