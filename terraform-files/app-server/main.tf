@@ -19,7 +19,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_app_tf"{
     protocol = "tcp"
     rule_no = 100
     action = "allow"
-    cidr_block = ""
+    cidr_block = var.var_local_ip
     from_port = 22
     to_port = 22
   }
@@ -90,7 +90,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_app_tf" {
     protocol = "tcp"
     from_port = 22
     to_port = 22
-    cidr_blocks = [""]
+    cidr_blocks = [var.var_local_ip]
   }
   ingress {
     protocol = "tcp"

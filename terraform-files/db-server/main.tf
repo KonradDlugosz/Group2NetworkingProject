@@ -81,3 +81,26 @@ resource "aws_security_group" "java10x_netproject_group2_sg_db_tf" {
 }
 
 // INSTANCE (DB)
+resource "aws_instance" "java10x_netproject_group2_server_db_tf" {
+  ami = "ami-0ea445bb04570b223" // WILL NEED FROM KONRAD
+  instance_type = "t2.micro"
+  key_name = "cyber-10x-group2"
+
+  subnet_id = aws_subnet.java10x_netproject_group2_subnet_db_tf.id
+  vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_db_tf.id]
+  associate_public_ip_address = false
+
+  tags = {
+    Name = "java10x_netproject_group2_server_db"
+  }
+}
+
+// RECORD (DB)
+resource "aws_route53_record" "java10x_netproject_group2_r53_record_db_tf" {
+  zone_id = var.var_zone_id_tf
+  name = "db"
+  type = "A"
+  ttl = "30"
+
+  records = [aws_instance.java10x_netproject_group2_server_db_tf.private_ip]
+}

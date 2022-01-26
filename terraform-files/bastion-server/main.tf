@@ -25,7 +25,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_bastion_tf" {
       from_port = 22
       to_port = 22
       protocol = "tcp"
-      cidr_block = "0.0.0.0/0"
+      cidr_block = "var.var_local_ip"
     }
 
     ingress {
@@ -71,7 +71,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_bastion_tf" {
       from_port = 22
       to_port = 22
       protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = [var.var_local_ip]
     }
 
     egress {
