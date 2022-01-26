@@ -57,15 +57,14 @@ module "app_module" {
   var_ami_linux_ubuntu_tf = var.var_ami_linux_ubuntu_tf
   var_rt_tf = aws_route_table.java10x_netproject_group2_rt_tf.id
   var_zone_id_tf = aws_route53_zone.java10x_netproject_group2_r53_zone_tf.id
-  var_local_ip = var.var_local_ip_tf
+  var_local_ip_tf = var.var_local_ip_tf
 }
 
 module "db_module" {
   source = "./db-server"
-  var_db_instance_tf = module.db_module.output_db
+  //var_db_instance_tf = module.db_module.output_db
   var_vpc_id_tf = aws_vpc.java10x_netproject_group2_vpc_tf.id
   var_zone_id_tf = aws_route53_zone.java10x_netproject_group2_r53_zone_tf.id
-  var_rt_id_tf = aws_route_table.java10x_netproject_group2_rt_tf.id
 }
 
 module "bastion_module" {
@@ -74,7 +73,7 @@ module "bastion_module" {
   var_vpc_id_tf = aws_vpc.java10x_netproject_group2_vpc_tf.id
   var_zone_id_tf = aws_route53_zone.java10x_netproject_group2_r53_zone_tf.id
   var_rt_id_tf = aws_route_table.java10x_netproject_group2_rt_tf.id
-  var_local_ip = var.var_local_ip_tf
+  var_local_ip_tf = var.var_local_ip_tf
 }
 
 module "proxy_module" {
