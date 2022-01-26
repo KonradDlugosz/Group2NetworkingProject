@@ -1,3 +1,3 @@
-variable "var_local_ip" {
-  default = ""
+variable "var_local_ip_tf" {
+  default = "" //CHANGE IT TO YOURS
 }
