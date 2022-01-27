@@ -19,7 +19,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_app_tf"{
     protocol = "tcp"
     rule_no = 100
     action = "allow"
-    cidr_block = var.var_local_ip
+    cidr_block = var.var_local_ip_tf
     from_port = 22
     to_port = 22
   }
@@ -90,7 +90,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_app_tf" {
     protocol = "tcp"
     from_port = 22
     to_port = 22
-    cidr_blocks = [var.var_local_ip]
+    cidr_blocks = [var.var_local_ip_tf]
   }
   ingress {
     protocol = "tcp"
@@ -175,7 +175,7 @@ resource "aws_route53_record" "java10x_netproject_group2_r53_record_app_tf" {
   type = "A"
   ttl = "30"
 
-  records = aws_instance.java10x_netproject_group2_server_tf.*.public_ip
+  records = aws_instance.java10x_netproject_group2_instance_app_tf.*.public_ip
 
 
 }
