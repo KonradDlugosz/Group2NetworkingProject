@@ -29,7 +29,7 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
     provisioner "remote-exec" {
         inline = [
             "chmod 744 /home/ubuntu/nginx-install.sh",
-            "/home/ubuntu/init-nginx.sh",
+            "/home/ubuntu/nginx-install.sh",
         ]
     }
 
