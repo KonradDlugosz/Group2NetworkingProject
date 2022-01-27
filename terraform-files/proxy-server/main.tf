@@ -2,7 +2,11 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
     ami = var.var_ami_linux_ubuntu_tf
     instance_type = "t2.micro"
     key_name = "cyber-10x-group2"
+<<<<<<< HEAD
+
+=======
     /*
+>>>>>>> dev
     subnet_id = aws_subnet.java10x_netproject_group2_subnet_db_tf.id
     vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_db_tf.id]
     */
