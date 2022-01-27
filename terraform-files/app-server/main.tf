@@ -131,7 +131,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
     vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_app_tf.id]
     associate_public_ip_address = true
 
-    count = 3
+    count = 1
     depends_on = [var.var_db_instance_tf]
 
     connection {
@@ -145,7 +145,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
       working_dir = "./ansible"
       command = "ansible-playbook -i ${self.public_ip}, -u ubuntu playbook-app.yml"
       environment = { // Add things to the environment(?)
-        ANSIBLE_CONFIG = "${abspath(path.root)}/ansible" // path.root = project directory, abspath is a function that gives us the absolute path
+        ANSIBLE_CONFIG = "${abspath(path.root)}/terraform-files/ansible" // path.root = project directory, abspath is a function that gives us the absolute path
       }
     }
 
@@ -154,7 +154,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
       source = "./init-scripts/docker-install.sh"
       destination = "/home/ubuntu/docker-install.sh"
     } */
-        
+
     provisioner "file" {
       source = "./init-scripts/applications.properties"
       destination = "/home/ubuntu/applications.properties"
@@ -167,7 +167,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
         "/home/ubuntu/docker-install.sh",
       ]
     } */
-      
+
     tags = {
       Name = "java10x_netproject_group2_server_app_${count.index}"
     }

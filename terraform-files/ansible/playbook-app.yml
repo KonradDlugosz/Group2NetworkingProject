@@ -57,4 +57,4 @@
         ports:
           - "8080:8080"
         volumes:
-          - "{{ playbook_dir }}/../init-scripts/application.properties:/application.properties
+          - "{{ playbook_dir }}/../init-scripts/application.properties:/application.properties"
