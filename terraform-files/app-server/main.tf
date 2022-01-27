@@ -142,12 +142,12 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
     }
 
     provisioner "file" {
-      source = "/home/vagrant/host/Group2NetworkingProject/terraform-files/init-scripts/docker-install.sh"
+      source = "./init-scripts/docker-install.sh"
       destination = "/home/ubuntu/docker-install.sh"
     }
 
     provisioner "file" {
-      source = "/home/vagrant/host/Group2NetworkingProject/terraform-files/init-scripts/applications.properties"
+      source = "./init-scripts/applications.properties"
       destination = "/home/ubuntu/applications.properties"
     }
 
@@ -157,13 +157,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
         "/home/ubuntu/docker-install.sh",
       ]
     }
-
-    provisioner "remote-exec" {
-      inline = [
-        "docker run -d -p 8080:8080 --mount type=bind,source=/home/ubuntu/application.properties,target=/application.properties talalt/sakilarestapi:4.0"
-      ]
-    }
-
+    
     tags = {
       Name = "java10x_netproject_group2_server_app_${count.index}"
     }
