@@ -25,7 +25,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_bastion_tf" {
       from_port = 22
       to_port = 22
       protocol = "tcp"
-      cidr_block = "var.var_local_ip"
+      cidr_block = var.var_local_ip_tf
     }
 
     ingress {
@@ -71,7 +71,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_bastion_tf" {
       from_port = 22
       to_port = 22
       protocol = "tcp"
-      cidr_blocks = [var.var_local_ip]
+      cidr_blocks = [var.var_local_ip_tf]
     }
 
     egress {
@@ -106,7 +106,7 @@ resource "aws_instance" "java10x_netproject_group2_server_bastion_tf" {
     key_name = "cyber-10x-group2"
 
     subnet_id = aws_subnet.java10x_netproject_group2_subnet_bastion_tf.id
-    vpc_security_group_ids = [aws_security_group.]
+    vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_bastion_tf.id]
     associate_public_ip_address = true
 
     tags = {
