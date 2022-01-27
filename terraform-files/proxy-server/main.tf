@@ -17,13 +17,18 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
     }
 
     provisioner "file" {
-        source = "./init-scripts/init-nginx.sh"
-        destination = "/home/ubuntu/init-nginx.sh"
+      source = "./init-scripts/default"
+      destination = "/home/ubuntu/default"
+    }
+
+    provisioner "file" {
+      source = "./init-scripts/nginx-install.sh"
+      destination = "/home/ubuntu/nginx-install.sh"
     }
 
     provisioner "remote-exec" {
         inline = [
-            "chmod 744 /home/ubuntu/init-nginx.sh",
+            "chmod 744 /home/ubuntu/nginx-install.sh",
             "/home/ubuntu/init-nginx.sh",
         ]
     }
