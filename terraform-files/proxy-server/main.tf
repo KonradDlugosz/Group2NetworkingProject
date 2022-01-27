@@ -2,9 +2,9 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
     ami = var.var_ami_proxy_tf
     instance_type = "t2.micro"
     key_name = "cyber-10x-group2"
-    
-    subnet_id = aws_subnet.java10x_netproject_group2_subnet_db_tf.id
-    vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_db_tf.id]
+
+    subnet_id = aws_subnet.java10x_netproject_group2_subnet_proxy_tf.id
+    vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_proxy_tf.id]
     associate_public_ip_address = false
 
     depends_on = [var.var_app_id_tf]
@@ -47,7 +47,7 @@ resource "aws_subnet" "java10x_netproject_group2_subnet_proxy_tf" {
     cidr_block = var.var_proxy_subnet_ip_tf
 
     tags = {
-        Name = "java10x_netproject_group2_subnet_db"
+        Name = "java10x_netproject_group2_subnet_proxy_tf"
     }
 }
 
@@ -57,7 +57,7 @@ resource "aws_route_table_association" "java10x_netproject_group2_rt_assoc_app_t
 }
 
 resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
-    name = var.var_proxy_security_group_name_tf  
+    name = var.var_proxy_security_group_name_tf
     vpc_id = var.var_vpc_id_tf
 
     ingress {
@@ -98,7 +98,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
 
 
     tags = {
-        Name = "java10x_netproject_group2_proxy_db"
+        Name = "java10x_netproject_group2_sg_proxy_tf"
     }
 }
 
@@ -150,7 +150,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_proxy_tf" {
         from_port = 1024
         to_port = 65535
     }
-    
+
     subnet_ids = [aws_subnet.java10x_netproject_group2_subnet_proxy_tf.id]
 
     tags = {

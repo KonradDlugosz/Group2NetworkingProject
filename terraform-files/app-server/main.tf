@@ -19,7 +19,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_app_tf"{
     protocol = "tcp"
     rule_no = 100
     action = "allow"
-    cidr_block = ""
+    cidr_block = var.var_local_ip_tf
     from_port = 22
     to_port = 22
   }
@@ -90,7 +90,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_app_tf" {
     protocol = "tcp"
     from_port = 22
     to_port = 22
-    cidr_blocks = [""]
+    cidr_blocks = [var.var_local_ip_tf]
   }
   ingress {
     protocol = "tcp"
@@ -132,7 +132,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
     associate_public_ip_address = true
 
     count = 3
-    depends_on = [var.var_database_id_tf]
+    depends_on = [var.var_db_instance_tf]
 
     connection {
       type = "ssh"
@@ -141,6 +141,33 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
       private_key = file("/home/vagrant/.ssh/cyber-10x-group2.pem")
     }
 
+    provisioner "local-exec" {
+      working_dir = "./ansible"
+      command = "ansible-playbook -i ${self.public_ip}, -u ubuntu playbook-app.yml"
+      environment = { // Add things to the environment(?)
+        ANSIBLE_CONFIG = "${abspath(path.root)}/ansible" // path.root = project directory, abspath is a function that gives us the absolute path
+      }
+    }
+
+      /*
+    provisioner "file" {
+      source = "./init-scripts/docker-install.sh"
+      destination = "/home/ubuntu/docker-install.sh"
+    } */
+        
+    provisioner "file" {
+      source = "./init-scripts/applications.properties"
+      destination = "/home/ubuntu/applications.properties"
+    }
+
+      /*
+    provisioner "remote-exec" {
+      inline = [
+        "chmod 744 /home/ubuntu/docker-install.sh",
+        "/home/ubuntu/docker-install.sh",
+      ]
+    } */
+      
     tags = {
       Name = "java10x_netproject_group2_server_app_${count.index}"
     }
@@ -152,7 +179,7 @@ resource "aws_route53_record" "java10x_netproject_group2_r53_record_app_tf" {
   type = "A"
   ttl = "30"
 
-  records = aws_instance.java10x_netproject_group2_server_tf.*.public_ip
+  records = aws_instance.java10x_netproject_group2_instance_app_tf.*.public_ip
 
 
 }
