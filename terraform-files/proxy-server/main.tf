@@ -5,7 +5,7 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
 
     subnet_id = aws_subnet.java10x_netproject_group2_subnet_proxy_tf.id
     vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_proxy_tf.id]
-    associate_public_ip_address = false
+    associate_public_ip_address = true
 
     depends_on = [var.var_app_id_tf]
 
@@ -13,7 +13,7 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
         type = "ssh"
         host = self.public_ip
         user = "ubuntu"
-        private_key = file(var.var_key_file_path_tf)
+        private_key = file("/home/vagrant/.ssh/cyber-10x-group2.pem")
     }
 
     provisioner "file" {

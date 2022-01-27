@@ -141,13 +141,20 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
       private_key = file("/home/vagrant/.ssh/cyber-10x-group2.pem")
     }
 
+    provisioner "remote-exec" {
+        inline = [
+          "ls -la"
+        ]
+    }
+
     provisioner "local-exec" {
       working_dir = "./ansible"
       command = "ansible-playbook -i ${self.public_ip}, -u ubuntu playbook-app.yml"
       environment = { // Add things to the environment(?)
-        ANSIBLE_CONFIG = "${abspath(path.root)}/terraform-files/ansible" // path.root = project directory, abspath is a function that gives us the absolute path
+        ANSIBLE_CONFIG = "${abspath(path.root)}/ansible" // path.root = terraform main directory, abspath is a function that gives us the absolute path
       }
     }
+
 
       /*
     provisioner "file" {

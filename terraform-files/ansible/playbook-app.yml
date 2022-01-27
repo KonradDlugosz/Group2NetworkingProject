@@ -37,7 +37,7 @@
     - name: Adding the current user to docker group to allow docker running without sudo
       user:
         name: ubuntu
-        group: docker
+        groups: docker
         append: yes # essentially: sudo usermod -a -G docker ubuntu
 
 #    - name: Copy a File to the destination
