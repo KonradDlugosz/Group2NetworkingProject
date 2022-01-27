@@ -1,3 +1,3 @@
 variable "var_local_ip_tf" {
-  default = "" //CHANGE IT TO YOURS
+  default = "81.98.113.26/32" //CHANGE IT TO YOURS
 }
