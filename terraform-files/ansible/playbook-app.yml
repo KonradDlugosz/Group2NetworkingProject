@@ -40,13 +40,13 @@
         group: docker
         append: yes # essentially: sudo usermod -a -G docker ubuntu
 
-    - name: Copy a File to the destination
-      copy:
-        src: "{{ playbook_dir }}/../init-scripts/sakila-app.sh" # {{playbook_dir}} means we start where the playbook is
-        dest: /home/ubuntu
-        owner: ubuntu
-        group: ubuntu
-        mode: 0744
+#    - name: Copy a File to the destination
+#      copy:
+#        src: "{{ playbook_dir }}/../init-scripts/sakila-app.sh" # {{playbook_dir}} means we start where the playbook is
+#        dest: /home/ubuntu
+#        owner: ubuntu
+#        group: ubuntu
+#        mode: 0744
 
     - name: Run App Container
       docker_container:
@@ -57,4 +57,4 @@
         ports:
           - "8080:8080"
         volumes:
-          - /home/ubuntu/application.properties:/application.properties
+          - "{{ playbook_dir }}/../init-scripts/application.properties:/application.properties

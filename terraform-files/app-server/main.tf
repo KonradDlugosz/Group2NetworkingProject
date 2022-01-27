@@ -141,23 +141,33 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
       private_key = file("/home/vagrant/.ssh/cyber-10x-group2.pem")
     }
 
+    provisioner "local-exec" {
+      working_dir = "./ansible"
+      command = "ansible-playbook -i ${self.public_ip}, -u ubuntu playbook-app.yml"
+      environment = { // Add things to the environment(?)
+        ANSIBLE_CONFIG = "${abspath(path.root)}/ansible" // path.root = project directory, abspath is a function that gives us the absolute path
+      }
+    }
+
+      /*
     provisioner "file" {
       source = "./init-scripts/docker-install.sh"
       destination = "/home/ubuntu/docker-install.sh"
-    }
-
+    } */
+        
     provisioner "file" {
       source = "./init-scripts/applications.properties"
       destination = "/home/ubuntu/applications.properties"
     }
 
+      /*
     provisioner "remote-exec" {
       inline = [
         "chmod 744 /home/ubuntu/docker-install.sh",
         "/home/ubuntu/docker-install.sh",
       ]
-    }
-    
+    } */
+      
     tags = {
       Name = "java10x_netproject_group2_server_app_${count.index}"
     }
