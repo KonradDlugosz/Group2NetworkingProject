@@ -1,5 +1,5 @@
 resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
-    ami = var.var_ami_linux_ubuntu_tf
+    ami = var.var_ami_proxy_tf
     instance_type = "t2.micro"
     key_name = "cyber-10x-group2"
 
@@ -16,18 +16,17 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
         private_key = file(var.var_key_file_path_tf)
     }
 
-//COPY CERTS | QQ: Show certs be in GitHub repo ?
-    # provisioner "file" {
-    #     source = "./certs"
-    #     destination = "/home/ubuntu/certs"
-    # }
-//START NGINX
-    # provisioner "remote-exec" {
-    #     inline = [
-    #         "sudo systemctl start nginx",
-    #     ]
-    # }
+    provisioner "file" {
+        source = "./init-scripts/init-nginx.sh"
+        destination = "/home/ubuntu/init-nginx.sh"
+    }
 
+    provisioner "remote-exec" {
+        inline = [
+            "chmod 744 /home/ubuntu/init-nginx.sh",
+            "/home/ubuntu/init-nginx.sh",
+        ]
+    }
 
     tags = {
         Name = "java10x_netproject_group2_server_proxy"
