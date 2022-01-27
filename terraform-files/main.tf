@@ -81,7 +81,7 @@ module "proxy_module" {
 
   var_app_id_tf = module.app_module.output_webserver_id
 
-  var_ami_linux_ubuntu_tf = var.var_ami_linux_ubuntu_tf
+  var_ami_proxy_tf = var.var_ami_proxy_tf
   var_proxy_subnet_ip_tf = var.var_proxy_subnet_ip_tf
   var_key_file_path_tf = var.var_key_file_path_tf
 
