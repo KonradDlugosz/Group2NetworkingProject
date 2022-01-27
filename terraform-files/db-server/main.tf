@@ -82,7 +82,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_db_tf" {
 
 // INSTANCE (DB)
 resource "aws_instance" "java10x_netproject_group2_server_db_tf" {
-  ami = "ami-0ea445bb04570b223" // WILL NEED FROM KONRAD
+  ami = "ami-0ea3534e3a082663b" // WILL NEED FROM KONRAD
   instance_type = "t2.micro"
   key_name = "cyber-10x-group2"
 
