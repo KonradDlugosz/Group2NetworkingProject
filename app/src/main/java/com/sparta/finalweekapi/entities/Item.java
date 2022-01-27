@@ -14,7 +14,7 @@ public class Item {
 
     @JsonBackReference
     @ManyToOne(optional = false)
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userid", nullable = false)
     private User userId;
 
     @Column(name = "item", nullable = false, length = 160)
