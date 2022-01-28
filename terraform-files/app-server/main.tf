@@ -163,8 +163,8 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
     } */
 
     provisioner "file" {
-      source = "./init-scripts/applications.properties"
-      destination = "/home/ubuntu/applications.properties"
+      source = "./init-scripts/application.properties"
+      destination = "/home/ubuntu/application.properties"
     }
 
       /*
