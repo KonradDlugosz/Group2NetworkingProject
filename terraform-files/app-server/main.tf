@@ -131,7 +131,7 @@ resource "aws_instance" "java10x_netproject_group2_instance_app_tf" {
     vpc_security_group_ids = [aws_security_group.java10x_netproject_group2_sg_app_tf.id]
     associate_public_ip_address = true
 
-    count = 1
+    count = 3
     depends_on = [var.var_db_instance_tf]
 
     connection {
