@@ -99,10 +99,10 @@ resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
     }
 
     egress {
-    protocol = "tcp"
-    from_port = 80
-    to_port = 80
-    cidr_blocks = ["0.0.0.0/0"]
+      protocol = "tcp"
+      from_port = 80
+      to_port = 80
+      cidr_blocks = ["0.0.0.0/0"]
     }
 
     egress {
@@ -116,14 +116,14 @@ resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
         protocol = "tcp"
         from_port = 8080
         to_port = 8080
-        cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = ["10.15.1.0/24"]
     }
 
     egress {
-    from_port = 1024
-    to_port = 65535
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+        from_port = 1024
+        to_port = 65535
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
 

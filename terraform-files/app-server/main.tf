@@ -27,7 +27,7 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_app_tf"{
     protocol = "tcp"
     rule_no = 200
     action = "allow"
-    cidr_block = "0.0.0.0/0"
+    cidr_block = "10.15.4.0/24"
     from_port = 8080
     to_port = 8080
   }
@@ -96,7 +96,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_app_tf" {
     protocol = "tcp"
     from_port = 8080
     to_port = 8080
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.15.4.0/24"]
   }
   egress {
     protocol = "tcp"
@@ -186,5 +186,5 @@ resource "aws_route53_record" "java10x_netproject_group2_r53_record_app_tf" {
   type = "A"
   ttl = "30"
 
-  records = aws_instance.java10x_netproject_group2_instance_app_tf.*.public_ip
+  records = aws_instance.java10x_netproject_group2_instance_app_tf.*.private_ip
 }
