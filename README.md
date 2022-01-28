@@ -14,9 +14,9 @@ The tools we used to construct the framework and app were:
 * Terraform
 * Docker
 
-## Project Structure
+## Structure
 
-The app was modulated into 4 different modules. With each module being created for each server.
+The Infrastructure was modulated into 4 different modules. With each module being created for each server.
 
 The resources created outside of the specific modules:
 * VPC
