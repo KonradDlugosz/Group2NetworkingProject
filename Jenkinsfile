@@ -2,7 +2,7 @@ pipeline {
   environment {
     PROJECT_DIR = "/app"
     CONTAINER_NAME = "items_api"
-    DOCKER_ACCOUNT = "konrad2020"
+    DOCKER_ACCOUNT = "talalt"
     REGISTRY = "$DOCKER_ACCOUNT" + "/" + "$CONTAINER_NAME"
     IMAGE_NAME = "$REGISTRY" + ":" + "$BUILD_NUMBER"
     REGISTRY_CREDENTIALS = "docker_hub"
