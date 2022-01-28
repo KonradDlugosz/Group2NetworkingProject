@@ -13,7 +13,19 @@ resource "aws_instance" "java10x_netproject_group2_server_proxy_tf" {
         type = "ssh"
         host = self.public_ip
         user = "ubuntu"
-        private_key = file("/home/vagrant/.ssh/cyber-10x-group2.pem")
+        private_key = file(var.var_key_file_path_tf)
+    }
+
+    provisioner "file" {
+      source = "./init-scripts/certificate.sh"
+      destination = "/home/ubuntu/certificate.sh"
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "chmod 744 /home/ubuntu/certificate.sh",
+            "/home/ubuntu/certificate.sh"
+        ]
     }
 
     provisioner "file" {
@@ -69,7 +81,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
         protocol = "tcp"
         from_port = 22
         to_port = 22
-        cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = [var.var_local_ip_tf]
     }
 
     ingress {
@@ -86,6 +98,12 @@ resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+    egress {
+    protocol = "tcp"
+    from_port = 80
+    to_port = 80
+    cidr_blocks = ["0.0.0.0/0"]
+    }
 
     egress {
         protocol = "tcp"
@@ -101,6 +119,13 @@ resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+    egress {
+    from_port = 1024
+    to_port = 65535
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
 
     tags = {
         Name = "java10x_netproject_group2_sg_proxy_tf"
@@ -114,9 +139,18 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_proxy_tf" {
         protocol = "tcp"
         rule_no = 100
         action = "allow"
-        cidr_block = "0.0.0.0/0"
+        cidr_block = var.var_local_ip_tf
         from_port = 22
         to_port = 22
+    }
+
+    ingress {
+      rule_no = 200
+      action = "allow"
+      from_port = 8080
+      to_port = 8080
+      protocol = "tcp"
+      cidr_block = "0.0.0.0/0"
     }
 
     ingress {
@@ -140,12 +174,21 @@ resource "aws_network_acl" "java10x_netproject_group2_nacl_proxy_tf" {
 
     egress {
         protocol = "tcp"
-        rule_no = 200
+        rule_no = 100
         action = "allow"
         cidr_block = "0.0.0.0/0"
         from_port = 443
         to_port = 443
     }
+
+    egress {
+    rule_no = 200
+    action = "allow"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_block = "0.0.0.0/0"
+  }
 
     egress {
         protocol = "tcp"

@@ -187,6 +187,4 @@ resource "aws_route53_record" "java10x_netproject_group2_r53_record_app_tf" {
   ttl = "30"
 
   records = aws_instance.java10x_netproject_group2_instance_app_tf.*.public_ip
-
-
 }
