@@ -1,14 +1,7 @@
-#!/usr/bin/bash
-echo "Running initial update... "
+#!/usr/bin/env bash
+
+sudo apt-get remove -y nginx
 sudo apt-get update
-echo "Installing nginx... "
-sudo apt-get install -y nginx-core
-echo "Running initial update... "
-sudo apt-get update
-echo "Installing nginx... "
-sudo apt-get install -y nginx-core
-echo "Updating config and restarting nginx..."
-sudo mv default /etc/nginx/sites-available
-sleep 1
+sudo apt-get install -y nginx
+sudo mv /home/ubuntu/default /etc/nginx/sites-available/default
 sudo systemctl restart nginx
-echo "System Ready!"

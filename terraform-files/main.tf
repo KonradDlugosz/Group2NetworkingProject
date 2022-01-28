@@ -78,7 +78,7 @@ module "bastion_module" {
 
 module "proxy_module" {
   source = "./proxy-server"
-
+  var_local_ip_tf = var.var_local_ip_tf
   var_app_id_tf = module.app_module.output_webserver_id
 
   var_ami_proxy_tf = var.var_ami_proxy_tf
