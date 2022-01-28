@@ -124,7 +124,7 @@ resource "aws_security_group" "java10x_netproject_group2_sg_proxy_tf" {
     to_port = 65535
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
+    }
 
 
     tags = {
